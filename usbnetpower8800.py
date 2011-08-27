@@ -15,17 +15,19 @@
 # limitations under the License.
 
 
-# This is a simple command-line tool for controlling the USB Net Power 8800.
-# It's basically a box with a USB port and a switchable power outlet.  It
-# shows up under "lsusb" as:
+# This is a simple command-line tool for controlling the "USB Net Power 8800"
+# from Linux (etc.) using Python and PyUSB.  It shows up under lsusb as:
+#
 #     ID 067b:2303 Prolific Technology, Inc. PL2303 Serial Port
 #
 # But, from what I can tell, none of the serial port features are ever used,
 # and all you really need is one USB control transfer for reading the current
 # state, and another for setting it.
 #
-# This hardware has the unfortunate property that unplugging its USB port
-# immediately kills the power, which reduces its usefulness.
+# The device is basically a box with a USB port and a switchable power outlet.
+# It has the unfortunate property that disconnecting it from USB immediately
+# kills the power, which reduces its usefulness.
+
 
 import sys
 import usb.core
