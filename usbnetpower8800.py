@@ -41,11 +41,12 @@
 
 
 import sys
+import time
 import usb.core
 
 usage = (
     "Controller for the USB Net Power 8800\n"
-    "Usage: %s on|off|toggle|query\n")
+    "Usage: %s on|off|toggle|reset <seconds>|query\n")
 
 
 class Power(object):
@@ -80,6 +81,13 @@ def main(argv):
         power.Set(False)
     elif cmd == "toggle":
         power.Set(not power.IsOn())
+    elif cmd == "reset":
+        power.Set(False)
+        try:
+            time.sleep(float(argv[2]))
+        except (IndexError, ValueError):
+            time.sleep(1.0)
+        power.Set(True)
     elif cmd == "query":
         on = power.IsOn()
         sys.stdout.write("Power: %s\n" % ("on" if on else "off"))
