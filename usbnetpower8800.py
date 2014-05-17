@@ -46,7 +46,7 @@ import usb.core
 
 usage = (
     "Controller for the USB Net Power 8800\n"
-    "Usage: %s on|off|toggle|reset <seconds>|query\n")
+    "Usage: %s on|off|toggle|reboot <seconds>|query\n")
 
 
 class Power(object):
@@ -81,7 +81,7 @@ def main(argv):
         power.Set(False)
     elif cmd == "toggle":
         power.Set(not power.IsOn())
-    elif cmd == "reset":
+    elif cmd == "reboot":
         power.Set(False)
         try:
             time.sleep(float(argv[2]))
